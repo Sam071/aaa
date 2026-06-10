@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="p-5 mb-4 bg-white rounded-3 shadow-sm border text-center">
+    <h1 class="display-5 fw-bold text-primary">歡迎來到台北生活綜合資訊網</h1>
+    <p class="lead text-muted mt-3">本網站整合了台北市內便利的交通查詢、即時氣象狀態預報，以及不可錯過的人氣在地美食指南。</p>
+</div>
+
+<div class="row g-4 mt-2">
+    <div class="col-md-4">
+        <div class="card h-100 shadow-sm border-0">
+            <div class="card-body text-center">
+                <div class="fs-1 mb-2">🚇</div>
+                <h4 class="card-title fw-bold">交通系統</h4>
+                <p class="card-text text-muted">模擬台北捷運各路線的列車到站倒數計時與車廂擁擠度，出門通勤必看。</p>
+                <a href="/transport" class="btn btn-outline-primary px-4 mt-2">進入查詢</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card h-100 shadow-sm border-0">
+            <div class="card-body text-center">
+                <div class="fs-1 mb-2">🌤️</div>
+                <h4 class="card-title fw-bold">天氣預報</h4>
+                <p class="card-text text-muted">提供台北市各行政區精確的氣溫、濕度與氣候狀態，並附帶實用的生活建議。</p>
+                <a href="/weather" class="btn btn-outline-success px-4 mt-2">查看天氣</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card h-100 shadow-sm border-0">
+            <div class="card-body text-center">
+                <div class="fs-1 mb-2">🍕</div>
+                <h4 class="card-title fw-bold">美食介紹</h4>
+                <p class="card-text text-muted">精選台北超人氣餐廳與夜市小吃，支援關鍵字即時搜尋，老饕口袋名單大公開。</p>
+                <a href="/food" class="btn btn-outline-warning px-4 mt-2">尋找美食</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
