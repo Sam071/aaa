@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
+    <div>
+        <h2 class="fw-bold text-dark m-0">🍕 台北美食在地口袋名單</h2>
+        <p class="text-muted m-0 mt-1">精選台北不容錯過的排隊小吃與經典餐館</p>
+    </div>
+    
+    <!-- 搜尋欄表單 -->
+    <form class="d-flex shadow-sm" method="GET" action="/food" style="max-width: 400px; width: 100%;">
+        <input class="form-control me-2" type="search" name="search" placeholder="搜尋美食名稱、區域或分類..." value="{{ search_query }}">
+        <button class="btn btn-warning text-white fw-bold px-4" type="submit">搜尋</button>
+    </form>
+</div>
+
+{% if search_query %}
+<div class="alert alert-info py-2 shadow-sm d-flex justify-content-between align-items-center">
+    <span>正在顯示包含「<strong class="text-danger">{{ search_query }}</strong>」的搜尋結果。</span>
+    <a href="/food" class="btn btn-sm btn-outline-secondary">清除搜尋</a>
+</div>
+{% endif %}
+
+<!-- 美食卡片清單 -->
+<div class="row g-4">
+    {% if foods %}
+        {% for food in foods %}
+        <div class="col-md-6">
+            <div class="card h-100 shadow-sm border-0">
+                <div class="card-body p-4">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <h4 class="card-title fw-bold text-dark mb-0">{{ food.name }}</h4>
+                        <span class="badge bg-warning text-dark px-3 py-2 fw-bold">{{ food.category }}</span>
+                    </div>
+                    <h6 class="text-primary mb-3">📍 {{ food.area }}</h6>
+                    <p class="card-text text-muted">{{ food.desc }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <div class="col-12 text-center py-5">
+            <div class="fs-1 text-muted mb-2">🔍</div>
+            <p class="text-muted fs-5">抱歉，找不到符合該關鍵字的美食，要不要換個詞試試看？</p>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
