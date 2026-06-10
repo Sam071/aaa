@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>台北生活綜合資訊網</title>
+    <!-- 引入 Bootstrap 5 美化介面 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { font-family: 'Microsoft JhengHei', sans-serif; }
+    </style>
+</head>
+<body class="bg-light d-flex flex-column min-vh-100">
+
+    <!-- 導覽列 -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="/">📍 台北生活綜合資訊網</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="/transport">🚇 交通系統</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/weather">🌤️ 天氣預報</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/food">🍕 美食介紹</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主要內容區塊 -->
+    <div class="container my-5 flex-grow-1">
+        {% block content %}{% endblock %}
+    </div>
+
+    <!-- 頁尾 -->
+    <footer class="bg-dark text-white text-center py-3 mt-auto">
+        <p class="mb-0">© 2026 Python Web 網頁設計期末報告</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
