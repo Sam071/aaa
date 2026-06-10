@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+    <div class="col-12 mb-4">
+        <h2 class="fw-bold">🚇 台北捷運即時看板 (模擬系統)</h2>
+        <p class="text-muted">請點擊下方路線查看該線各站點的下班列車資訊及車廂人潮。</p>
+    </div>
+    
+    <!-- 左側路線選單 -->
+    <div class="col-md-4 mb-4">
+        <div class="list-group shadow-sm">
+            {% for line in mrt_lines.keys() %}
+            <button type="button" class="list-group-item list-group-item-action py-3 fw-bold fs-5 text-center" onclick="fetchMrtStatus('{{ line }}')">
+                📍 {{ line }}
+            </button>
+            {% endfor %}
+        </div>
+    </div>
+    
+    <!-- 右側動態看板 -->
+    <div class="col-md-8">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white fw-bold py-3 fs-5" id="line-title">
+                請選擇左側捷運路線
+            </div>
+            <div class="card-body p-0">
+                <table class="table table-hover mb-0 align-middle">
+                    <thead class="table-light">
+                        <tr>
+                            <th class="ps-4">車站名稱</th>
+                            <th>下一班列車</th>
+                            <th class="pe-4">車廂擁擠度</th>
+                        </tr>
+                    </thead>
+                    <tbody id="mrt-tbody">
+                        <tr>
+                            <td colspan="3" class="text-center py-5 text-muted">目前尚未選擇路線，請點擊左側按鈕。</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function fetchMrtStatus(line) {
+    document.getElementById('line-title').innerText = "🚇 " + line + " - 即時到站狀態";
+    
+    // 利用 Fetch API 向後端請求 JSON 數據
+    fetch('/api/mrt/' + line)
+        .then(response => response.json())
+        .then(data => {
+            let tbody = document.getElementById('mrt-tbody');
+            tbody.innerHTML = '';
+            data.forEach(item => {
+                let badgeClass = '';
+                if (item.crowd === '擁擠') badgeClass = 'bg-danger';
+                else if (item.crowd === '普通') badgeClass = 'bg-warning text-dark';
+                else badgeClass = 'bg-success';
+                
+                tbody.innerHTML += `
+                    <tr>
+                        <td class="ps-4 fw-bold text-secondary">${item.station}</td>
+                        <td><span class="text-primary fw-bold">倒數 ${item.next_train}</span></td>
+                        <td class="pe-4"><span class="badge ${badgeClass} px-3 py-2">${item.crowd}</span></td>
+                    </tr>
+                `;
+            });
+        });
+}
+</script>
+{% endblock %}
