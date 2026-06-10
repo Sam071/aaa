@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>台北美食地圖</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">期末報告網站</a>
+            <div class="navbar-nav">
+                <a class="nav-link" href="/">首頁(天氣/交通)</a>
+                <a class="nav-link" href="/stock">股票查詢</a>
+                <a class="nav-link active" href="/food">台北美食</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container my-5">
+        <h2 class="mb-4">😋 台北在地必吃美食推薦</h2>
+        <p class="text-muted mb-4">精選台北超人氣排隊名店與在地小吃，點評與推薦必點品項。</p>
+
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            {% for food in foods %}
+            <div class="col">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <span class="badge bg-warning text-dark mb-2">{{ food.area }}</span>
+                        <span class="badge bg-secondary mb-2">{{ food.type }}</span>
+                        <h4 class="card-title text-dark mt-1">{{ food.name }}</h4>
+                        <p class="card-text text-muted mt-3">{{ food.desc }}</p>
+                    </div>
+                    <div class="card-footer bg-white border-top-0 pb-3">
+                        <div class="p-2 bg-light rounded text-success">
+                            <strong>👍 必點推薦：</strong> {{ food.recommend }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+</body>
+</html>
